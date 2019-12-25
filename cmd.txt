@@ -1,9 +1,13 @@
-1. cree
+- cree (1. src  2. catkin_create_pkg 3. add CMakeLists cmd)
 
-2. catkin_make
+- catkin_make
 
-3. buil/setpu.bash
+- source devil/setup.bash
 
-4. source devil/setup.bash
+- roscore
 
-5. rosrun Pack Node
+- rosrun Pack Node
+
+
+git config --global user.email "isaia.spinelli@heig-vd.ch"
+git config --global user.name "isaiaSpinelli"
