@@ -1,0 +1,9 @@
+1. cree
+
+2. catkin_make
+
+3. buil/setpu.bash
+
+4. source devil/setup.bash
+
+5. rosrun Pack Node
