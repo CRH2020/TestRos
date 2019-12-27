@@ -11,3 +11,12 @@
 
 git config --global user.email "isaia.spinelli@heig-vd.ch"
 git config --global user.name "isaiaSpinelli"
+
+
+
+--- UART ---
+REF : https://github.com/husarion/rosbot-firmware-new
+	https://github.com/ROBOTIS-GIT/turtlebot3/tree/master/turtlebot3_bringup
+
+
+rosrun rosserial_python serial_node.py _port:=/dev/ttyS1 _baud:=500000
