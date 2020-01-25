@@ -229,3 +229,24 @@ add_executable(add_two_ints_client src/add_two_ints_client.cpp)
 target_link_libraries(add_two_ints_client ${catkin_LIBRARIES})
 add_dependencies(add_two_ints_client beginner_tutorials_gencpp)
 #add_dependencies(add_two_ints_client ${beginner_tutorials_EXPORTED_TARGETS})
+
+
+
+add_executable(teleop_turtle_key src/teleop_turtle_key.cpp)
+target_link_libraries(teleop_turtle_key ${catkin_LIBRARIES})
+add_dependencies(teleop_turtle_key beginner_tutorials_gencpp)
+
+
+
+
+
+#add_executable(serialExample src/serialExample.cpp)
+#rosbuild_add_executable(serialExample src/serialExample.cpp)
+#target_link_libraries(serialExample cereal_port)
+#add_library(serialExample src/serialExample.cpp)
+
+
+#add_executable(PubHello src/PubHello.cpp)
+#target_link_libraries(talker ${catkin_LIBRARIES})
+#add_dependencies(PubHello beginner_tutorials_generate_messages_cpp)
+

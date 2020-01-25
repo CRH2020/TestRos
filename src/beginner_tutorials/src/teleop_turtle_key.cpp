@@ -9,6 +9,7 @@
 #define KEYCODE_U 0x41
 #define KEYCODE_D 0x42
 #define KEYCODE_Q 0x71
+#define KEYCODE_Y 0x79
 
 class TeleopTurtle
 {
@@ -28,13 +29,13 @@ private:
 TeleopTurtle::TeleopTurtle():
   linear_(0),
   angular_(0),
-  l_scale_(2.0),
-  a_scale_(2.0)
+  l_scale_(10.0),
+  a_scale_(10.0)
 {
   nh_.param("scale_angular", a_scale_, a_scale_);
   nh_.param("scale_linear", l_scale_, l_scale_);
 
-  twist_pub_ = nh_.advertise<geometry_msgs::Twist>("turtle1/cmd_vel", 1);
+  twist_pub_ = nh_.advertise<geometry_msgs::Twist>("velocity", 1);
 }
 
 int kfd = 0;
@@ -99,12 +100,12 @@ void TeleopTurtle::keyLoop()
     {
       case KEYCODE_L:
         ROS_DEBUG("LEFT");
-        angular_ = 1.0;
+        angular_ = 0.2;
         dirty = true;
         break;
       case KEYCODE_R:
         ROS_DEBUG("RIGHT");
-        angular_ = -1.0;
+        angular_ = -0.2;
         dirty = true;
         break;
       case KEYCODE_U:
@@ -117,6 +118,13 @@ void TeleopTurtle::keyLoop()
         linear_ = -1.0;
         dirty = true;
         break;
+     case KEYCODE_Y:
+        ROS_DEBUG("STOP");
+        linear_ = 0;
+	angular_ = 0;
+        dirty = true;
+        break;
+
       case KEYCODE_Q:
         ROS_DEBUG("quit");
         return;

@@ -285,6 +285,19 @@ gtest/fast:
 .PHONY : gtest/fast
 
 #=============================================================================
+# Target rules for targets named teleop_turtle_key
+
+# Build rule for target.
+teleop_turtle_key: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 teleop_turtle_key
+.PHONY : teleop_turtle_key
+
+# fast build rule for target.
+teleop_turtle_key/fast:
+	$(MAKE) -f beginner_tutorials/CMakeFiles/teleop_turtle_key.dir/build.make beginner_tutorials/CMakeFiles/teleop_turtle_key.dir/build
+.PHONY : teleop_turtle_key/fast
+
+#=============================================================================
 # Target rules for targets named add_two_ints_client
 
 # Build rule for target.
@@ -618,6 +631,7 @@ help:
 	@echo "... gmock"
 	@echo "... gtest_main"
 	@echo "... gtest"
+	@echo "... teleop_turtle_key"
 	@echo "... add_two_ints_client"
 	@echo "... talker"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
