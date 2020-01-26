@@ -1,6 +1,13 @@
 #include <ros/ros.h>
 #include <cereal_port/CerealPort.h>
 
+/* CECI N'EST PAS UTILISÉ !!
+rosrun rosserial_python serial_node.py _port:=/dev/ttyS2 _baud:=57600
+LA COMMANDE CI DESSUS SUFFIT POUR PARTAGER UN TOPIC VIA L'UART
+!
+!
+!*/
+
 #define REPLY_SIZE 8
 #define TIMEOUT 1000
 
