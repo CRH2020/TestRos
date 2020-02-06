@@ -69,21 +69,21 @@ void TeleopTurtle::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
   } else if ( joy->axes[AXE_X_FLECHE] == 1 && axe_x_fleche_inactif == 1) {
       /* Diminue le facteur des axes x*/
     axe_x_fleche_inactif = 0;
-    angular_scale_ = angular_scale_ > 0 ? angular_scale_ - 1 : 0;
+    angular_scale_ = angular_scale_ > 0 ? angular_scale_ - 0.2 : 0;
   } else if ( joy->axes[AXE_X_FLECHE] == -1 && axe_x_fleche_inactif == 1) {
     /* Augemente le facteur des axes x*/
     axe_x_fleche_inactif = 0;
-    angular_scale_ = angular_scale_ < ANGULAR_SCALE_MAX ? angular_scale_ + 1 : ANGULAR_SCALE_MAX;
+    angular_scale_ = angular_scale_ < ANGULAR_SCALE_MAX ? angular_scale_ + 0.2 : ANGULAR_SCALE_MAX;
   }
 
   /* Devient Non actif */
   if ( joy->axes[AXE_Y_FLECHE] == 0 && axe_y_fleche_inactif == 0) {
     axe_y_fleche_inactif = 1;
-  } else if ( joy->axes[AXE_Y_FLECHE] == 1 && axe_y_fleche_inactif == 1) {
+  } else if ( joy->axes[AXE_Y_FLECHE] == -1 && axe_y_fleche_inactif == 1) {
       /* Diminue le facteur des axes x*/
     axe_y_fleche_inactif = 0;
     linear_scale_ = linear_scale_ > 0 ? linear_scale_ - 1 : 0;
-  } else if ( joy->axes[AXE_Y_FLECHE] == -1 && axe_y_fleche_inactif == 1) {
+  } else if ( joy->axes[AXE_Y_FLECHE] == 1 && axe_y_fleche_inactif == 1) {
     /* Augemente le facteur des axes x*/
     axe_y_fleche_inactif = 0;
     linear_scale_ = linear_scale_ < LINEAR_SCALE_MAX ? linear_scale_ + 1 : LINEAR_SCALE_MAX;
