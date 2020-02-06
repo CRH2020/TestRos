@@ -1,3 +1,11 @@
+Dependances :
+
+- PS4 : sudo apt-get install ros-melodic-joy
+
+
+
+Méthodologie :
+
 - cree (1. src  2. catkin_create_pkg 3. add CMakeLists cmd)
 
 - catkin_make
