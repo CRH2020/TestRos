@@ -16,7 +16,7 @@ private:
   int linear_, angular_;
 
   const double ANGULAR_SCALE_MAX = 2;
-  double angular_scale_ = 2;
+  double angular_scale_ = 0;
   const double LINEAR_SCALE_MAX = 10;
   double linear_scale_ = 10;
   ros::Publisher vel_pub_;
@@ -34,6 +34,8 @@ private:
   int axe_x_fleche_inactif = 0;
   const int AXE_Y_FLECHE = 10;
   int axe_y_fleche_inactif = 0;
+
+  int send_0 = 0;
 
 };
 
@@ -69,11 +71,11 @@ void TeleopTurtle::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
   } else if ( joy->axes[AXE_X_FLECHE] == 1 && axe_x_fleche_inactif == 1) {
       /* Diminue le facteur des axes x*/
     axe_x_fleche_inactif = 0;
-    angular_scale_ = angular_scale_ > 0 ? angular_scale_ - 0.2 : 0;
+    angular_scale_ = angular_scale_ > 0 ? angular_scale_ - 0.02 : 0;
   } else if ( joy->axes[AXE_X_FLECHE] == -1 && axe_x_fleche_inactif == 1) {
     /* Augemente le facteur des axes x*/
     axe_x_fleche_inactif = 0;
-    angular_scale_ = angular_scale_ < ANGULAR_SCALE_MAX ? angular_scale_ + 0.2 : ANGULAR_SCALE_MAX;
+    angular_scale_ = angular_scale_ < ANGULAR_SCALE_MAX ? angular_scale_ + 0.02 : ANGULAR_SCALE_MAX;
   }
 
   /* Devient Non actif */
@@ -90,7 +92,7 @@ void TeleopTurtle::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
   }
 
   /* Non actif */
-  twist.angular.z = r2_accel * (angular_scale_ * joy->axes[AXE_X_GAUCHE]) ;
+  twist.angular.z = -r2_accel * (angular_scale_ * joy->axes[AXE_X_DROITE]) ;
   twist.linear.x  = r2_accel * (linear_scale_ * joy->axes[AXE_Y_GAUCHE]) ;
 
 //ROS_INFO("0:[%d] - 1:[%d] - 2:[%d] - 3:[%d] - 4:[%d] - 5:[%d] - 6:[%d] - \n", joy->buttons[7],joy->buttons[8],joy->buttons[9],joy->buttons[10],joy->buttons[11],joy->buttons[14],joy->buttons[15]);
@@ -100,8 +102,15 @@ void TeleopTurtle::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
 //ROS_INFO("lecture 4 : [%f]\n s", joy->axes[4]);
 //ROS_INFO("lecture 5 : [%f]\n s", joy->axes[5]);
 //ROS_INFO("lecture taile : [%f]\n s", joy->axes[6]);
-
-  vel_pub_.publish(twist);
+  if ( twist.angular.z == 0 && twist.linear.x == 0){
+    if (send_0 == 0){
+      send_0 = 1;
+      vel_pub_.publish(twist);
+    }  
+  } else {
+    send_0 = 0;
+    vel_pub_.publish(twist);        
+  }
 }
 
 
