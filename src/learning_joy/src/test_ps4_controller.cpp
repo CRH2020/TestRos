@@ -103,13 +103,13 @@ void TeleopTurtle::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
 //ROS_INFO("lecture 5 : [%f]\n s", joy->axes[5]);
 //ROS_INFO("lecture taile : [%f]\n s", joy->axes[6]);
   if ( twist.angular.z == 0 && twist.linear.x == 0){
-    if (send_0 == 0){
-      send_0 = 1;
+    if (send_0 < 5){
+      send_0++;
       vel_pub_.publish(twist);
-    }  
+    }
   } else {
     send_0 = 0;
-    vel_pub_.publish(twist);        
+    vel_pub_.publish(twist);
   }
 }
 
