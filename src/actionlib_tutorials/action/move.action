@@ -1,0 +1,9 @@
+#goal definition
+float64 distance
+float64 angle
+---
+#result definition
+int8 result
+---
+#feedback
+#int32[] sequence

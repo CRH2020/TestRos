@@ -25,6 +25,9 @@ REF : https://github.com/husarion/rosbot-firmware-new
 	https://github.com/ROBOTIS-GIT/turtlebot3/tree/master/turtlebot3_bringup
 	https://answers.ros.org/question/10114/how-can-ros-communicate-with-my-microcontroller/
 
+sudo apt-get install ros-melodic-rosserial
+
+rosrun rosserial_python serial_node.py _port:=/dev/ttyACM0 _baud:=57600
 rosrun rosserial_python serial_node.py _port:=/dev/ttyS2 _baud:=57600
 rosrun rosserial_python serial_node.py _port:=/dev/ttyS1 _baud:=9600
 
