@@ -207,3 +207,7 @@ target_link_libraries(turtle_teleop_joy ${catkin_LIBRARIES})
 add_executable(test_ps4 src/test_ps4_controller.cpp)
 target_link_libraries(test_ps4 ${catkin_LIBRARIES})
 
+
+add_executable(relais_ps4 src/relais_ps4.cpp)
+target_link_libraries(relais_ps4 ${catkin_LIBRARIES})
+
