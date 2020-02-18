@@ -16,7 +16,7 @@ private:
   int linear_, angular_;
 
   const double ANGULAR_SCALE_MAX = 2;
-  double angular_scale_ = 0;
+  double angular_scale_ = 0.02;
   const double LINEAR_SCALE_MAX = 10;
   double linear_scale_ = 10;
   ros::Publisher vel_pub_;
