@@ -1,6 +1,7 @@
 #include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
 #include <sensor_msgs/Joy.h>
+#include <geometry_msgs/Pose2D.h>
 
 
 class TeleopTurtle
@@ -37,6 +38,9 @@ private:
 
   int send_0 = 0;
 
+  void posCallback(const geometry_msgs::Pose2D::ConstPtr& pos);
+  ros::Subscriber pos_sub_;
+
 };
 
 
@@ -50,14 +54,24 @@ TeleopTurtle::TeleopTurtle():
   nh_.param("scale_angular", angular_scale_, angular_scale_);
   nh_.param("scale_linear", linear_scale_, linear_scale_);
 
-
-  vel_pub_ = nh_.advertise<geometry_msgs::Twist>("velocity", 1);
+  /* ATTENTION ! POUR COMMUNIQUER DIRECTEMENT AVEC LA NUCELO,
+  ENLEVER LE 1 DE VELOCITY !!*/
+  vel_pub_ = nh_.advertise<geometry_msgs::Twist>("velocity1", 1);
 
   joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("joy", 10, &TeleopTurtle::joyCallback, this);
+
+  pos_sub_ = nh_.subscribe<geometry_msgs::Pose2D>("pos1", 10, &TeleopTurtle::posCallback, this);
 
   ROS_INFO("angular_:[%d] - linear_:[%d]\n", angular_, linear_);
 
 }
+
+void TeleopTurtle::posCallback(const geometry_msgs::Pose2D::ConstPtr& pos)
+{ // Affichage de la position recue
+  ROS_INFO("x:[%f] - y:[%f] - theta:[%f]\n", pos->x , pos->y, pos->theta);
+}
+
+
 
 void TeleopTurtle::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
 {
