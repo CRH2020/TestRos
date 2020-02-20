@@ -40,7 +40,7 @@ void TeleopTurtle::velCallback(const geometry_msgs::Twist::ConstPtr& twist)
 {
   geometry_msgs::Twist twist_send;
 
-  //twist_send = *twist;
+  twist_send = *twist;
 
   vel_pub_.publish(twist_send);
 
@@ -50,7 +50,7 @@ void TeleopTurtle::posCallback(const geometry_msgs::Pose2D::ConstPtr& pos)
 {
   geometry_msgs::Pose2D pos_send;
 
-//  pos_send = *pos;
+  pos_send = *pos;
 
   pos_pub_.publish(pos_send);
 
