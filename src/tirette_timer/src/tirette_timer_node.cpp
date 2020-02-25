@@ -1,0 +1,26 @@
+#include <ros/ros.h>
+#include <wiringPi.h>
+
+#define TEST_PIN  1 // Valeur pour le moment arbitraire, A CHANGER
+
+
+void callback1(const ros::TimerEvent&)
+{
+    ROS_INFO("PIN %d has input value", TEST_PIN);
+    ROS_INFO("%d\n", digitalRead(TEST_PIN));
+    ros::Duration(1.0).sleep();
+    return;
+}
+
+int main(int argc, char **argv)
+{
+  ros::init(argc, argv, "test_tirette_timer");
+  ros::NodeHandle n;
+
+  /* Toutes les 5 secondes on aura la fonction callback1 qui sera appelee */
+  ros::Timer timer1 = n.createTimer(ros::Duration(5.0), callback1);
+
+  ros::spin();
+
+  return 0;
+}
