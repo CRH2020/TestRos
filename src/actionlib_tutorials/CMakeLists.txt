@@ -70,10 +70,10 @@ find_package(catkin REQUIRED COMPONENTS
 #   Action2.action
 # )
 
-add_action_files(
-  DIRECTORY action
-  FILES Fibonacci.action move.action sequence.action
-)
+#add_action_files(
+#  DIRECTORY action
+#  FILES Fibonacci.action move.action sequence.action
+#)
 
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
@@ -81,9 +81,9 @@ add_action_files(
 #   actionlib_msgs#   std_msgs
 # )
 
-generate_messages(
-  DEPENDENCIES actionlib_msgs std_msgs  # Or other packages containing msgs
-)
+#generate_messages(
+#  DEPENDENCIES actionlib_msgs std_msgs  # Or other packages containing msgs
+#)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -115,7 +115,7 @@ generate_messages(
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-  CATKIN_DEPENDS actionlib_msgs
+#  CATKIN_DEPENDS actionlib_msgs
 #  INCLUDE_DIRS include
 #  LIBRARIES actionlib_tutorials
 #  CATKIN_DEPENDS actionlib actionlib_msgs message_generation roscpp rospy std_msgs
@@ -218,27 +218,27 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
-add_executable(fibonacci_server src/fibonacci_server.cpp)
+#add_executable(fibonacci_server src/fibonacci_server.cpp)
 
-target_link_libraries(
-  fibonacci_server
-  ${catkin_LIBRARIES}
-)
+#target_link_libraries(
+#  fibonacci_server
+#  ${catkin_LIBRARIES}
+#)
 
-add_dependencies(
-  fibonacci_server
-  ${actionlib_tutorials_EXPORTED_TARGETS}
-)
+#add_dependencies(
+#  fibonacci_server
+#  ${actionlib_tutorials_EXPORTED_TARGETS}
+#)
 
 
-add_executable(fibonacci_client src/fibonacci_client.cpp)
+#add_executable(fibonacci_client src/fibonacci_client.cpp)
 
-target_link_libraries( 
-  fibonacci_client
-  ${catkin_LIBRARIES}
-)
+#target_link_libraries( 
+#  fibonacci_client
+#  ${catkin_LIBRARIES}
+#)
 
-add_dependencies(
-  fibonacci_client
-  ${actionlib_tutorials_EXPORTED_TARGETS}
-)
+#add_dependencies(
+#  fibonacci_client
+#  ${actionlib_tutorials_EXPORTED_TARGETS}
+#)
