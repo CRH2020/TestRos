@@ -15,18 +15,21 @@
 
 int main(int argc, char **argv)
 {
+
+  ROS_INFO("displayer begin");
+
   /* ROS init */
   ros::init(argc, argv, "displayer");
   ros::NodeHandle n;
 
-  unsigned char buffer[60] = {0};
+  unsigned char buffer[32] = {0};
 
   int fd, addr;
 
   /* Open i2c device */
   fd = open("/dev/i2c-1", O_RDWR);
   if (fd < 0) {
-    /* ERROR */
+    ROS_INFO("Can't open device file");
     return -1;
   }
 
@@ -34,15 +37,30 @@ int main(int argc, char **argv)
   addr = 0x70;
   if (ioctl(fd, I2C_SLAVE, addr) < 0) {  
   	/* ERROR */
-  	return -1;
+  	ROS_INFO("Can't interface with slave");
   }
 
   /* Clear displayer */
   buffer[0] = CHAR1_PER;
-  buffer[1] = 0x00;
-  if (write(fd, CHAR1_PER, 2)) {
+  buffer[1] = 0xff;
+  int length = 2;
+  if (write(fd, buffer, length) != length) {
   	/* ERROR */
+  	ROS_INFO("Can't write");
   }
+
+  /* Set blinking frequency */
+  buffer[0] = 0x81;
+  buffer[1] = 0x00;
+  if (write(fd, buffer, length) != length) {
+  	ROS_INFO("Can't write!");
+  }
+
+  /* Set brightness */
+  //buffer[0] = 0xef;
+  //if (write(fd, buffer, length) != length) {
+  //	ROS_INFO("Can't write!");
+  //}
 
   /* Closes device */
   close(fd);
